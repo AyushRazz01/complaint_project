@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: complaint_db
+    ports:
+      - "3307:3306"
+
+  app:
+    build: .
+    container_name: complaint-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
